@@ -2,7 +2,7 @@ var Nightmare = require('nightmare');
 //var path = require('path');
 var config = require('../config')({dirname: __dirname});
 var phantomPath = config.phantomPath;
-var pricingPath = config.basePath({path: '/pricing2/'});
+var pricingPath = config.basePath({path: '/features-and-plans/'});
 
 describe('pricing page', function() {
 
@@ -15,7 +15,7 @@ describe('pricing page', function() {
             plan: 'bronze-oneyear'
           }
         }))
-        .click('#feature-list-get-started-now')
+        .click('#starter-cta')
         .wait(300)
         .screenshot(config.screenshot({ imgName: 'downgrade-confirm' }))
         .click('#downgrade-plan-form button[type="submit"]')
@@ -62,7 +62,7 @@ describe('pricing page', function() {
             plan: ''
           }
         }))
-        .click('#feature-list-get-started-now')
+        .click('#starter-cta')
         .wait('body.change-plan-success')
         .wait(300)
         .screenshot(config.screenshot({ imgName: 'pricing-no-plan-start-new-plan' }))
@@ -81,7 +81,7 @@ describe('pricing page', function() {
       new Nightmare({phantomPath: phantomPath})
         .viewport(1024, 1000)
         .goto(pricingPath)
-        .click('#feature-list-get-started-now')
+        .click('#starter-cta')
         .wait(300)
         .type('#signup-dialog input[name="email"]', config.email)
         .type('#signup-dialog input[name="password1"]', 'ks93+-93KLI')
@@ -110,7 +110,7 @@ describe('pricing page', function() {
       new Nightmare({phantomPath: phantomPath})
         .viewport(1024, 1000)
         .goto(pricingPath)
-        .click('#feature-list-talk-to-us')
+        .click('#enterprise-cta')
         .wait(300)
         .type('#contact-sales-form input[name="first_name"]', config.firstName)
         .type('#contact-sales-form input[name="last_name"]', config.lastName)
