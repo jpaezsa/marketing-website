@@ -54,6 +54,24 @@ describe('pricing page', function() {
   }); //end create account test
 
   describe('signed in user with no plan', function() {
+    it('expects the starter button to have id feature-list-get-started-now', function(done) {
+      new Nightmare({phantomPath: phantomPath})
+        .viewport(1024, 1000)
+        .goto(config.basePath({
+          queryParams: {
+            plan: ''
+          }
+        }))
+        .wait(300)
+        .screenshot(config.screenshot({ imgName: 'enterprise-downgrade-option' }))
+        .evaluate(function() {
+          return window.jQuery('#feature-list-get-started-now').attr('id');
+        }, function(result) {
+            expect(result).toBe('feature-list-get-started-now');
+        })
+        .run(done);
+    });
+
     it('signs up for starter plan', function(done) {
       new Nightmare({phantomPath: phantomPath})
         .viewport(1024, 1000)

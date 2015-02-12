@@ -74,6 +74,24 @@ describe('pricing page', function() {
         })
         .run(done);
     });
+
+    it('expects the starter button to have id starter-cta', function(done) {
+      new Nightmare({phantomPath: phantomPath})
+        .viewport(1024, 1000)
+        .goto(config.basePath({
+          queryParams: {
+            plan: ''
+          }
+        }))
+        .wait(300)
+        .screenshot(config.screenshot({ imgName: 'enterprise-downgrade-option' }))
+        .evaluate(function() {
+          return window.jQuery('#starter-cta').attr('id');
+        }, function(result) {
+            expect(result).toBe('starter-cta');
+        })
+        .run(done);
+    });
   }); //end create account test
 
   describe('anonymous visitor', function() {
